@@ -43,8 +43,10 @@
 						<hr width="130px;">
 					</div>
 					<div class="d-flex justify-content-center">
-						<img src="/static/image/facebook.png" width="30px;" height="30px;" class="mr-3">	
-						<span>facebook으로 로그인</span>
+						<label>
+							<img src="/static/image/facebook.png" width="30px;" height="30px;" class="mr-3">	
+							<a href="https://www.facebook.com/"><span>facebook으로 로그인</span></a>
+						</label>
 					</div>
 					
 					<div class="d-flex justify-content-center mt-2">

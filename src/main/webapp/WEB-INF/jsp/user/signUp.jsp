@@ -33,7 +33,7 @@
 				<div class="login-box">
 			
 				<img src="/static/image/instagram-new-logo.png" width="300px;" height="70px;">
-				<form>
+				
 					<div class="mt-2">				
 						<span>친구들의 사진과 동영상을 보려면 가입하세요.</span>
 					</div>
@@ -60,7 +60,7 @@
 							<a href="/user/signin_view"><input type="submit" style="height:40px;" class="btn btn-info btn-block mt-3" value="로그인"></a>
 						</div>
 					</div>
-				</form>
+				
 				
 				</div>
 			</div>
