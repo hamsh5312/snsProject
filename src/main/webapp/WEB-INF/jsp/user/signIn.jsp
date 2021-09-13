@@ -36,7 +36,7 @@
 				<div class="login-box mt-5 pt-5">
 					<input type="text" class="form-control" placeholder="아이디를 입력하세요.">
 					<input type="password" class="form-control mt-3" placeholder="비밀번호를 입력하세요.">
-					<input type="submit" class="btn btn-info btn-block mt-3" value="로그인">
+					<input type="submit" class="btn btn-dark btn-block mt-3" value="로그인">
 					<div class="d-flex mt-3">
 						<hr width="130px;">
 						<span>또는</span>
@@ -45,7 +45,7 @@
 					<div class="d-flex justify-content-center">
 						<label>
 							<img src="/static/image/facebook.png" width="30px;" height="30px;" class="mr-3">	
-							<a href="https://www.facebook.com/"><span>facebook으로 로그인</span></a>
+							<a href="https://www.facebook.com/" style="text-decoration-line:none;"><span>facebook으로 로그인</span></a>
 						</label>
 					</div>
 					
@@ -53,7 +53,7 @@
 						<span>비밀번호를 잊으셨나요?</span>
 					</div>
 					<div class="text-center mt-2">
-							<a href="/user/signup_view"><input type="submit" class="btn btn-info btn-block mt-3" value="가입하기"></a>
+							<a href="/user/signup_view" style="text-decoration-line:none;"><input type="submit" class="btn btn-secondary btn-block mt-3" value="가입하기"></a>
 					</div>	
 				</div>
 			
