@@ -21,11 +21,9 @@
 	
 	<div id="wrap">
 	
-	
 		<header>
 		
 		</header>
-		
 		
 		<section class="content">
 		
@@ -46,15 +44,10 @@
 						<hr width="130px;">
 					</div>
 					
-					
-					<div class="d-flex">
-						
+					<div class="d-flex">	
 						<input type="text" id="loginIdInput" style="width:180px;" class="form-control mt-2 mr-3" placeholder="아이디를 입력하세요.">
-						<input type="button" id="duplicateCheckBtn" style="width:100px;" class="btn btn-primary btn-block mt-3" value="중복확인">
-						
-					</div>
-					
-					
+						<input type="button" id="duplicateCheckBtn" style="width:100px;" class="btn btn-primary btn-block mt-3" value="중복확인">		
+					</div>	
 						<input type="password" id="passwordInput" class="form-control mt-3" placeholder="비밀번호를 입력하세요.">
 						<input type="password" id="passwordConfirmInput" class="form-control mt-3" placeholder="비밀번호 확인">
 						<input type="text" id="nameInput" class="form-control mt-3" placeholder="이름">
@@ -77,11 +70,9 @@
 		
 		</section>
 		
-		
 		<footer>
 		
-		</footer>
-		
+		</footer>	
 		
 	</div>
 	
@@ -174,7 +165,6 @@
 		
 		
 		
-		
 		$("#duplicateCheckBtn").on("click", function(){
 			
 			//e.preventDefault();
@@ -217,6 +207,7 @@
 		});
 		
 		
+		//  중복검사 후, 다시 아이디를 고치는경우에 다시 중복체크 되도록
 		$("#loginIdInput").change(function(){
 			isChecked = false;
 		});
