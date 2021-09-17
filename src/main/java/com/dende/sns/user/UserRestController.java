@@ -3,34 +3,37 @@ package com.dende.sns.user;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.dende.sns.user.bo.UserBO;
+import com.dende.sns.user.model.User;
 
 @RestController
 @RequestMapping("/user")
 public class UserRestController {
-
+	
 	@Autowired
 	private UserBO userBO;
 	
-	
 	@PostMapping("/sign_up")
-	public Map<String, String> signUp(
+	public Map<String, String> signUpFunction(
 			@RequestParam("loginId") String loginId
 			, @RequestParam("password") String password
 			, @RequestParam("name") String name
 			, @RequestParam("email") String email){
 		
-		int count = userBO.addUser(loginId, password, name, email);
 		
 		Map<String, String> result = new HashMap<>();
+		int count = userBO.signUp(loginId, password, name, email);
+		
 		if(count == 1) {
 			result.put("result", "success");
 			
@@ -43,23 +46,52 @@ public class UserRestController {
 	}
 	
 	
-	@GetMapping("/duplicationTest")
-	@ResponseBody
-	public Map<String, Boolean> isDuplication(
-		@RequestParam("loginId") String loginId){
+	@GetMapping("/is_duplicate_id")
+	public Map<String, Boolean> isDuplicateId(@RequestParam("loginId") String loginId){
 			
 		Map<String, Boolean> result = new HashMap<>(); 
 			
-		if(userBO.isDuplication(loginId)) {
-			result.put("isDuplication", true);
+		if(userBO.isDuplicateId(loginId)) {
+			result.put("is_duplicate", true);
 		}else {
-			result.put("isDuplication", false);
+			result.put("is_duplicate", false);
 		}
+		
+//		 result.put("is_duplicate", userBO.isDuplicateId(loginId));
 		
 		return result;
 			
 	}
 	
+	
+	@PostMapping("/sign_in")
+	public Map<String, String> signInFunction(
+			@RequestParam("loginId") String loginId
+			, @RequestParam("password") String password
+			, HttpServletRequest request){
+		
+		User user =userBO.signIn(loginId, password);
+		
+		Map<String, String> result = new HashMap<>();
+		
+		// 샐랙트 결과가 있냐 없냐?
+		// 셀렉트 결과가 있다
+		if(user != null) {
+			
+			result.put("result", "success");
+			
+			HttpSession session = request.getSession();
+			session.setAttribute("userId", user.getId());
+			session.setAttribute("userLoginId", user.getLoginId());
+			session.setAttribute("userName", user.getName());
+			
+		}else {
+			result.put("result", "fail");
+		}
+		
+		return result;
+		
+	}
 	
 	
 	

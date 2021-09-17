@@ -22,21 +22,22 @@
 
 	<div id="wrap">
 		
-		<header>
-		
-		</header>
+		<c:import url="/WEB-INF/jsp/include/header.jsp" />
 		
 		<section class="content">
+		
 			<div class="d-flex justify-content-center align-items-center">
 				
 				<div class="mr-5 mt-5">
-					<img src="/static/image/insta_img.jpg" width="250px;" height="350px;">
+					<img src="/static/images/insta_img.jpg" width="250px;" height="350px;">
 				</div>
 				
 				<div class="login-box mt-5 pt-5">
-					<input type="text" class="form-control" placeholder="아이디를 입력하세요.">
-					<input type="password" class="form-control mt-3" placeholder="비밀번호를 입력하세요.">
-					<input type="submit" class="btn btn-dark btn-block mt-3" value="로그인">
+					<form id="loginForm">
+						<input type="text" id="loginIdInput" class="form-control" placeholder="아이디를 입력하세요.">
+						<input type="password" id="passwordInput" class="form-control mt-3" placeholder="비밀번호를 입력하세요.">
+						<button id="loginBtn" type="submit" class="btn btn-dark btn-block mt-3" >로그인</button>
+					</form>
 					<div class="d-flex mt-3">
 						<hr width="130px;">
 						<span>또는</span>
@@ -44,7 +45,7 @@
 					</div>
 					<div class="d-flex justify-content-center">
 						<label>
-							<img src="/static/image/facebook.png" width="30px;" height="30px;" class="mr-3">	
+							<img src="/static/images/facebook.png" width="30px;" height="30px;" class="mr-3">	
 							<a href="https://www.facebook.com/" style="text-decoration-line:none;"><span>facebook으로 로그인</span></a>
 						</label>
 					</div>
@@ -59,16 +60,70 @@
 			
 			</div>
 			
-				
-			
 		</section>
 		
 		<footer>
 			
 		</footer>
-		
 	
 	</div>
+	
+	
+	<script>
+	
+	
+		$(document).ready(function(){
+			
+			$("#loginForm").on("submit",function(e){
+				
+				e.preventDefault();
+				
+				var loginId = $("#loginIdInput").val();
+				var password = $("#passwordInput").val();
+				
+				if(loginId == null || loginId == ""){
+					alert("아이디를 입력하세요.");
+					return;
+				}
+				
+				if(password == null || password == ""){
+					alert("패스워드를 입력하세요.");
+					return;
+				}
+				
+				$.ajax({
+					type:"post",
+					url:"/user/sign_in",
+					data:{"loginId":loginId, "password":password},
+					success:function(data){
+						if(data.result == "success"){
+							alert("로그인 성공");
+							
+						}else{
+							alert("아이디와 비밀번호를 확인해주세요");
+						}
+						
+					},
+					error:function(e){
+						alert("error");
+					}
+					
+					
+				});
+				
+				
+			});
+			
+			
+		});
+	
+	
+	</script>
+	
+	
+	
+	
+	
 	
 </body>
 </html>

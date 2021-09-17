@@ -1,10 +1,13 @@
 package com.dende.sns.user.bo;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.dende.sns.common.EncryptUtils;
 import com.dende.sns.user.dao.UserDAO;
+import com.dende.sns.user.model.User;
 
 @Service
 public class UserBO {
@@ -12,27 +15,41 @@ public class UserBO {
 	@Autowired
 	private UserDAO userDAO;
 	
-	public int addUser(String loginId, String password, String name, String email) {
+	private Logger logger = LoggerFactory.getLogger(this.getClass());
+	
+	public int signUp(String loginId, String password, String name, String email) {
 		
 		// password 암호화
 		String encryptPassword = EncryptUtils.md5(password);
 		
-		return userDAO.insertUser(loginId, encryptPassword, name, email);
-		
-	}
-	
-	// 중복인지 아닌지?
-	public boolean isDuplication(String loginId) {
-	
-		int count = userDAO.selectCountById(loginId);
-		
-		if(count >= 1) {
-			return true;
-		}else {
-			return false;
+		if(encryptPassword.equals("")) {
+			logger.error("[UserBO signUP] 암호화 실패!!!!!!!!!!!!!!");
+			return 0;
 		}
 		
+		
+		return userDAO.insertUser(loginId, encryptPassword, name, email);
 	}
+	
+	
+	
+	public boolean isDuplicateId(String loginId) {
+		if(userDAO.selectCountById(loginId) == 0) {
+			return false;
+		} else {
+			return true;
+		}
+		
+		// return (userDAO.selectCountById(loginId) != 0);
+	}
+	
+	
+	public User signIn(String loginId, String password) {
+		String encryptPassword = EncryptUtils.md5(password);
+		
+		return userDAO.selectUserByLoginIdPassword(loginId, encryptPassword); 
+	}
+	
 	
 	
 }

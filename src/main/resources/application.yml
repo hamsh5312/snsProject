@@ -3,13 +3,13 @@ spring:
     static-path-pattern:  /static/**
     view:
       prefix: /WEB-INF/jsp/
-      suffix: .jsp
-      
-      
+      suffix: .jsp    
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/sns_project?serverTimezone=UTC&characterEncoding=UTF-8
     username: root
     password: hamsh5312
+    
+    
     
   

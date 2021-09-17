@@ -1,13 +1,29 @@
 #wrap{
-	width:1200px;
+	width:1000px;
 	
 	margin:auto;
 }
 
 
 header{
-	height:70px;
+	height:50px;
 
+}
+
+.header-box{
+	height:50px;
+	width:500px;
+		
+}
+
+.Hbox{
+	height:70px;
+	width:250px;
+}
+
+.loginStatusBox{
+	height:70px;
+	width:250px;	
 }
 
 .content{
@@ -15,11 +31,45 @@ header{
 	height:450px;
 }
 
+.timeline-box{
+	margin:auto;
+	/* 처음에 높이 700px로 했음*/
+	width:500px;
+}
+
+.dotBox{
+	border-style: solid; border-width: 2px;
+	padding: 12px; word-break: break-all; border-color: LightGray;
+	width:500px;
+	height:50px;
+}
+
+.otherContents{
+	border-style: solid; border-bottom-width:1px; border-top-width: 2px; border-right-width: 2px; border-left-width: 2px; 
+	word-break: break-all; border-color: LightGray;
+	height:150px;
+}
+
+.likeBox{
+	height:40px;
+}
+
+.opinionBox{
+	height:100px;	
+}
+
+.comment{
+	border-style: solid;border-top-width: 1px; border-right-width: 2px; border-left-width: 2px; border-bottom-width:2px; 
+	word-break: break-all; border-color: LightGray;
+	height:50px;
+}
+
 .login-box{
 	width:300px;
 }
 
 
+
 footer{
-	height:70px;
+	height:60px;
 }

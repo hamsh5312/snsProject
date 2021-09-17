@@ -10,11 +10,9 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 
-
 @Configuration
-@MapperScan(basePackages = "com.dende.sns.*")
+@MapperScan(basePackages="com.dende.sns.*")
 public class DatabaseConfig {
-
 	
 	@Bean
 	public SqlSessionFactory sqlSessionFactory(DataSource dataSource) throws Exception {
@@ -26,7 +24,6 @@ public class DatabaseConfig {
 		
 		return sessionFactory.getObject();
 	}
-	
 	
 }
 
