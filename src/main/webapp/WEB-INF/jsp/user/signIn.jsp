@@ -97,7 +97,7 @@
 					data:{"loginId":loginId, "password":password},
 					success:function(data){
 						if(data.result == "success"){
-							alert("로그인 성공");
+							location.href="/post/timeline";
 							
 						}else{
 							alert("아이디와 비밀번호를 확인해주세요");
@@ -105,7 +105,7 @@
 						
 					},
 					error:function(e){
-						alert("error");
+						alert("로그인실패");
 					}
 					
 					

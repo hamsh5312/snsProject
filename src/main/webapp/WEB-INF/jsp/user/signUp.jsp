@@ -59,7 +59,7 @@
 						<input type="text" id="nameInput" class="form-control mt-3" placeholder="이름">
 						<input type="text" id="emailInput" class="form-control mt-3" placeholder="이메일">
 						
-						<button type="submit" id="signUpBtn" class="btn btn-info btn-block mt-3" >가입</button>
+						<button type="submit" id="signUpBtn" class="btn btn-info btn-block mt-3" >회원가입</button>
 					</form>
 					
 					<div class="d-flex align-items-center justify-content-between">
@@ -244,12 +244,7 @@
 				});
 			});
 			
-			
-			
-			
-			
-			
-			
+	
 		});
 		
 	</script>

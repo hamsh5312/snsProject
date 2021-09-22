@@ -32,7 +32,6 @@ public class UserBO {
 	}
 	
 	
-	
 	public boolean isDuplicateId(String loginId) {
 		if(userDAO.selectCountById(loginId) == 0) {
 			return false;
@@ -45,6 +44,7 @@ public class UserBO {
 	
 	
 	public User signIn(String loginId, String password) {
+		// 비밀번호를 암호화 하고 DAO 로 전달한다.
 		String encryptPassword = EncryptUtils.md5(password);
 		
 		return userDAO.selectUserByLoginIdPassword(loginId, encryptPassword); 
