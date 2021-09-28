@@ -54,7 +54,7 @@ header{
 .otherContents{
 	border-style: solid; border-bottom-width:1px; border-top-width: 1px; border-right-width: 2px; border-left-width: 2px; 
 	word-break: break-all; border-color: LightGray;
-	height:150px;
+	
 }
 
 .likeBox{
@@ -62,7 +62,7 @@ header{
 }
 
 .opinionBox{
-	height:100px;	
+		
 }
 
 .comment{

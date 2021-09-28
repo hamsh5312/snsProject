@@ -1,4 +1,4 @@
-package com.dende.sns.post;
+package com.dende.sns.post.comment;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -11,41 +11,42 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.multipart.MultipartFile;
 
-import com.dende.sns.post.bo.PostBO;
-
-
+import com.dende.sns.post.comment.bo.CommentBO;
 
 @RestController
-@RequestMapping("/post")
-public class PostRestController {
+@RequestMapping("/post/comment")
+public class CommentRestController {
 
 	@Autowired
-	private PostBO postBO;
+	private CommentBO commentBO;
 	
 	@PostMapping("/create")
-	public Map<String ,String> create(
-			@RequestParam("content") String content
-			, @RequestParam(value = "file") MultipartFile file
+	public Map<String, String> create(
+			@RequestParam("postId") int postId
+			, @RequestParam("content") String content
 			, HttpServletRequest request){
 		
 		HttpSession session = request.getSession();
-		// getAttribute의 리턴형이 Object 형이라서  형변환이 필요
+		
 		int userId = (Integer)session.getAttribute("userId");
 		String userName = (String)session.getAttribute("userName");
 		
+		Map<String ,String> result = new HashMap<>();
 		
-		int count = postBO.addPost(userId, userName, content, file);
-		Map<String, String> result = new HashMap<>();
+		int count = commentBO.inputComment(postId, userId, userName, content);
 		
 		if(count == 1) {
 			result.put("result", "success");
-		}else {
-			result.put("result", "fail");
-		}
 			
+			
+		}else {
+			result.put("result","fail");
+		}
+		
 		return result;
 		
 	}
+	
+	
 }

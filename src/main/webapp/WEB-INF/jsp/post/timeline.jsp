@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
         <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-        
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -20,11 +20,14 @@
 </head>
 <body>
 	<div id="wrap">
+	
 		<c:import url="/WEB-INF/jsp/include/timelineHeader.jsp" />
 		<hr>
 		
 		<section class="timeline-box bg-light">
 			
+			<!-- 입력상자 -->
+			<c:if test="${userId ne null }">
 			<div class="border rounded mt-3 mb-3 bg-white">
 				<div>
 					<textarea class="form-control w-100 border-0 non-resize" rows="3" id="contentInput" placeholder="내용을 입력하세요."></textarea>
@@ -36,28 +39,31 @@
 					<button type="button" id="uploadBtn" class="btn btn-sm btn-info">업로드</button>
 				</div>
 			</div>
+			</c:if>
 			
-			
-			<c:forEach var="content" items="${uploadContents }">
-			<div class="my-4">
+			<!-- /피드 -->
+			<c:forEach var="postDetail" items="${postList }">
+			<div class="my-4 border rounded">
+				<!-- 타이틀 -->
 				<div class="dotBox pl-2 d-flex justify-content-between align-items-center">
 					<div>
 						<img src="/static/images/hm_circle.png" width="40px;" height="40px;">
-						<span>${content.userName }</span>
+						<span>${postDetail.post.userName }</span>
 					</div>						
-					<img src="/static/images/dotImage.jpeg" class="pr-2" width="25px;" height="25px;">	
+					<img src="/static/images/dotImage.png" class="pr-2" width="25px;" height="25px;">	
 				</div>
+				<!-- 이미지 -->
 				<div class="image-box">
-					<img src="${content.imagePath }" class="w-100 h-100">
+					<img src="${postDetail.post.imagePath }" class="w-100 h-100">
 				</div>
 				<div class="otherContents">
 					<div class="likeBox d-flex justify-content-between align-items-center pb-1">
 						<div class="ml-2">
-							<img src="/static/images/heart.jpeg" class="mr-1" width="20px;" height="20px;">
-							<img src="/static/images/wordPic.jpeg" class="mr-1" width="20px;" height="20px;">
-							<img src="/static/images/airplane.jpeg" width="20px;" height="20px;">
+							<img src="/static/images/heart.png" class="mr-1" width="20px;" height="20px;">
+							<img src="/static/images/wordPic.png" class="mr-1" width="20px;" height="20px;">
+							<img src="/static/images/airplane.png" width="20px;" height="20px;">
 						</div>
-						<img src="/static/images/shape.jpeg" class="mr-2" width="20px;" height="20px;">
+						<img src="/static/images/shape.png" class="mr-2" width="20px;" height="20px;">
 					</div>
 					
 					<div class="opinionBox">
@@ -65,13 +71,20 @@
 							<div class="mb-1">
 								<span class="pl-1">좋아요 971,645개</span><br>
 							</div>
+							
 							<div>
-								<b>${content.userName }</b> ${content.content } <br>
-								<span class="text-secondary">댓글 9,685개 모두 보기</span><br>
-								<b>bada</b> fantastic!!! 멋쪄요 멋쪄!~<br>
-								<b>marobiana</b>  GOOD!!!  지려따...<br>
-								<span class="text-secondary">8월 16일</span><br>
+								<b>${postDetail.post.userName }</b> ${postDetail.post.content } <br>
+								<div class="text-secondary">댓글</div>
+									<hr class="my-1">
+									<!-- 댓글 -->
+									<!--  postDetail > commentList -->
+									<c:forEach var="comment" items="${postDetail.commentList }">
+									<div class="my-1">
+										<b>${comment.userName }</b> ${comment.content }
+									</div>
+									</c:forEach>
 							</div>
+							
 						</div>
 					</div>
 				</div>
@@ -79,12 +92,17 @@
 				<div class="comment d-flex justify-content-between">
 					<div class="d-flex align-items-center pl-2">
 						<img src="/static/images/smile.jpeg" class="pr-2" width="30px;" height="30px;">
-						<input type="text" class="form-control" style="width:350px; height:35px;" id="commentInput" placeholder="댓글을 입력하세요.">
 					</div>
-					<div class="d-flex align-items-center pr-2">
-						<span class="text-primary">게시</span>
+					<c:if test="${userId ne null }">
+					<div class="input-group d-flex align-items-center pr-2">
+						<input type="text" class="form-control" id="commentInput-${postDetail.post.id }" placeholder="댓글을 입력하세요.">
+						<div class="input-group-append">
+							<button type="button" class="btn btn-info commentBtn" data-post-id="${postDetail.post.id }">게시</button>
+						</div>
 					</div>
+					</c:if>
 				</div>
+				
 			</div>	
 			</c:forEach>
 			
@@ -143,6 +161,45 @@
 				});		
 				
 			});
+			
+			
+			$(".commentBtn").on("click", function(){
+				// 지금 이벤트가 발생한 객체
+				// 클릭된 버튼 객체
+				var postId = $(this).data("post-id");
+				
+				//alert(postId);
+				//대응되는 input 의 value
+				// ex) postId = 5;
+				//  "#commentInput-5"
+				var content = $("#commentInput-" + postId).val();
+				
+				if(content == null || content == "") {
+					alert("댓글 내용을 입력하세요.");
+					return ;
+				}
+				
+				$.ajax({
+					type:"post",
+					url:"/post/comment/create",
+					data:{"postId":postId, "content":content},
+					success:function(data){
+						if(data.result == "success"){
+							//alert("댓글 작성 성공");
+							location.reload();
+						}else{
+							alert("댓글 작성 실패");
+						}
+					},
+					error:function(e){
+						alert("error");
+					}
+					
+				});
+			});
+		
+		
+		
 				
 		});
 	

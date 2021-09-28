@@ -27,11 +27,18 @@
 			</div>
 			
 			<div class="loginStatusBox">
-				<c:if test="${not empty userName }" >
-					<div class="text-dark d-flex justify-content-center mt-3 pt-1">
-						${userName } 님 <a href="/user/sign_out">[로그아웃] </a>
-					</div>
-				</c:if>
+				<c:choose>
+					<c:when test="${not empty userName }" >
+						<div class="text-dark d-flex justify-content-center mt-3 pt-1">
+							${userName } 님 <a href="/user/sign_out">[로그아웃] </a>
+						</div>
+					</c:when>
+					<c:otherwise>
+						<div class="text-dark d-flex justify-content-center mt-3 pt-1">
+							<a href="/user/signin_view">[로그인 하기] </a>
+						</div>
+					</c:otherwise>
+				</c:choose>
 			</div>
 			
 		</header>

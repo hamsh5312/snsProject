@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.dende.sns.post.bo.PostBO;
 import com.dende.sns.post.model.Post;
+import com.dende.sns.post.model.PostDetail;
 
 
 @Controller
@@ -23,17 +24,36 @@ public class PostController {
 	private PostBO postBO;
 	
 	@GetMapping("/timeline")
-	public String timeLine(
-			Model model
-			, HttpServletRequest request) {
-		HttpSession session = request.getSession();
-		int userId = (Integer)session.getAttribute("userId");
-		List<Post> uploadContents = postBO.getPostList(userId);
-		model.addAttribute("uploadContents", uploadContents);
+	public String timeLine(Model model) {
+		
+		List<PostDetail> postList = postBO.getPostList();
+		model.addAttribute("postList", postList);
+		
 		
 		return "post/timeline";
 	}
 	
+	
+	
+	
+	
+	
+	
+	
+	@GetMapping("noLoginTimeline")
+	public String noLogTimeline(
+			Model model
+			, HttpServletRequest request) {
+		
+		HttpSession session = request.getSession();
+		session.removeAttribute("userId");
+		session.removeAttribute("userName");
+		List<Post> uploadContents = postBO.getAllPostList();
+		model.addAttribute("uploadContents", uploadContents);
+		
+		return "post/timeline";
+		
+	}
 	
 	
 }
