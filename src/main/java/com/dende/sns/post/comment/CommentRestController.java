@@ -28,25 +28,18 @@ public class CommentRestController {
 			, HttpServletRequest request){
 		
 		HttpSession session = request.getSession();
-		
 		int userId = (Integer)session.getAttribute("userId");
 		String userName = (String)session.getAttribute("userName");
 		
 		Map<String ,String> result = new HashMap<>();
-		
 		int count = commentBO.inputComment(postId, userId, userName, content);
-		
 		if(count == 1) {
 			result.put("result", "success");
-			
-			
 		}else {
 			result.put("result","fail");
 		}
-		
 		return result;
-		
 	}
 	
-	
 }
+

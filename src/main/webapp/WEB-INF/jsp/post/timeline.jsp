@@ -18,17 +18,15 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
 
 </head>
-<body>
+<body class="bg-light">
 	<div id="wrap">
-	
 		<c:import url="/WEB-INF/jsp/include/timelineHeader.jsp" />
 		<hr>
 		
-		<section class="timeline-box bg-light">
-			
+		<section class="timeline-box">
 			<!-- 입력상자 -->
 			<c:if test="${userId ne null }">
-			<div class="border rounded mt-3 mb-3 bg-white">
+			<div class="border rounded mt-3 bg-white">
 				<div>
 					<textarea class="form-control w-100 border-0 non-resize" rows="3" id="contentInput" placeholder="내용을 입력하세요."></textarea>
 				</div>
@@ -41,60 +39,85 @@
 			</div>
 			</c:if>
 			
-			<!-- /피드 -->
+			<!-- 피드 -->
 			<c:forEach var="postDetail" items="${postList }">
-			<div class="my-4 border rounded">
+			<div class="my-3 card border rounded">
+			
 				<!-- 타이틀 -->
-				<div class="dotBox pl-2 d-flex justify-content-between align-items-center">
-					<div>
+				<div class="dotBox d-flex justify-content-between align-items-center">
+					<div class="pl-2">
 						<img src="/static/images/hm_circle.png" width="40px;" height="40px;">
-						<span>${postDetail.post.userName }</span>
-					</div>						
-					<img src="/static/images/dotImage.png" class="pr-2" width="25px;" height="25px;">	
+						${postDetail.post.userName }
+					</div>
+					
+					<!--  더보기 버튼 -->
+					<c:if test="${userId ne null }">
+					<div class="more-icon pr-2 pb-2">
+						<a class="text-dark moreBtn" href="#" data-post-id="${postDetail.post.id }" data-toggle="modal" data-target="#deleteModal">
+							<i class="bi bi-three-dots"></i>
+						</a>
+					</div>	
+					</c:if>					
 				</div>
+				
 				<!-- 이미지 -->
-				<div class="image-box">
-					<img src="${postDetail.post.imagePath }" class="w-100 h-100">
+				<div>
+					<img src="${postDetail.post.imagePath }" class="w-100 imageClick">
 				</div>
-				<div class="otherContents">
-					<div class="likeBox d-flex justify-content-between align-items-center pb-1">
-						<div class="ml-2">
-							<img src="/static/images/heart.png" class="mr-1" width="20px;" height="20px;">
-							<img src="/static/images/wordPic.png" class="mr-1" width="20px;" height="20px;">
-							<img src="/static/images/airplane.png" width="20px;" height="20px;">
-						</div>
-						<img src="/static/images/shape.png" class="mr-2" width="20px;" height="20px;">
+				
+				<!-- 좋아요  -->
+				<div class="d-flex justify-content-between align-items-center mt-1">
+					<div class="ml-2">
+						
+							<c:choose>
+								<c:when test="${postDetail.like }">
+									<a href="#" class="likeBtn" data-post-id="${postDetail.post.id }">
+										<i class="bi bi-heart-fill heart-icon text-danger"></i>
+									</a>
+								</c:when>
+								<c:otherwise>
+									<a href="#" class="likeBtn" data-post-id="${postDetail.post.id }">
+										<i class="bi bi-heart heart-icon text-dark"></i>
+									</a>
+								</c:otherwise>
+							</c:choose>
+						
+						<span class="pl-1" style="font-size:5px;"> 좋아요 ${postDetail.likeCount }개 </span>
+						
+					</div>
+					<i class="mr-2 bi bi-bookmark"></i>
+				</div>
+				
+				
+				<div style="font-size:5px;" class="pr-1 pl-1">
+				
+					<!-- content -->
+					<div class="my-2">
+						<b>${postDetail.post.userName }</b> ${postDetail.post.content }
 					</div>
 					
-					<div class="opinionBox">
-						<div style="font-size:5px;" class="pr-1 pl-1">
-							<div class="mb-1">
-								<span class="pl-1">좋아요 971,645개</span><br>
-							</div>
-							
-							<div>
-								<b>${postDetail.post.userName }</b> ${postDetail.post.content } <br>
-								<div class="text-secondary">댓글</div>
-									<hr class="my-1">
-									<!-- 댓글 -->
-									<!--  postDetail > commentList -->
-									<c:forEach var="comment" items="${postDetail.commentList }">
-									<div class="my-1">
-										<b>${comment.userName }</b> ${comment.content }
-									</div>
-									</c:forEach>
-							</div>
-							
-						</div>
+					<!-- 댓글 타이틀 -->
+					<div class="text-secondary">
+						댓글
 					</div>
+					<hr class="my-1">
+					
+					<!-- 댓글 -->
+					<c:forEach var="comment" items="${postDetail.commentList }">
+					<div class="my-1">
+						<b>${comment.userName }</b> ${comment.content }
+					</div>
+					</c:forEach>
+				
 				</div>
 					
-				<div class="comment d-flex justify-content-between">
-					<div class="d-flex align-items-center pl-2">
-						<img src="/static/images/smile.jpeg" class="pr-2" width="30px;" height="30px;">
+				<!-- 댓글 입력 -->
+				<div class="comment d-flex justify-content-between pl-2 pr-2">
+					<div class="d-flex align-items-center">
+						<i class="pr-2 bi bi-emoji-smile"></i>
 					</div>
 					<c:if test="${userId ne null }">
-					<div class="input-group d-flex align-items-center pr-2">
+					<div class="input-group d-flex align-items-center">
 						<input type="text" class="form-control" id="commentInput-${postDetail.post.id }" placeholder="댓글을 입력하세요.">
 						<div class="input-group-append">
 							<button type="button" class="btn btn-info commentBtn" data-post-id="${postDetail.post.id }">게시</button>
@@ -103,12 +126,39 @@
 					</c:if>
 				</div>
 				
-			</div>	
+				
+			</div>	<!-- <div class="my-3 card border rounded">의 끝 -->
+			
 			</c:forEach>
+			<!-- /피드 끝 -->
 			
 		</section>
 		
+	</div> <!-- <div id="wrap"> 의 끝 -->
+	
+	
+	<!-- 아래는  다음주소에   https://getbootstrap.com/docs/4.0/components/modal/  -->
+	<!-- Button trigger modal -->
+	<!-- 
+		<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#deleteModal">
+		  Launch demo modal
+		</button>
+	 -->
+	
+	
+	<!-- Modal -->
+	<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+	  <div class="modal-dialog modal-dialog-centered" role="document">
+	    <div class="modal-content">
+	      
+	      <div class="modal-body text-center">
+	        <a href="#" id="deleteBtn"> 삭제하기 </a>
+	      </div>
+	      
+	    </div>
+	  </div>
 	</div>
+	
 	
 	<script>
 	
@@ -117,7 +167,6 @@
 			$("#imageUploadBtn").on("click", function(){
 				$("#fileInput").click();
 			});
-			
 			
 			$("#uploadBtn").on("click", function(){
 				
@@ -198,10 +247,97 @@
 				});
 			});
 		
+
+			$(".likeBtn").on("click", function(e){
+				e.preventDefault();
+				
+				var postId = $(this).data("post-id");
+				
+				$.ajax({
+					type:"get",
+					url:"/post/like",
+					data:{"postId":postId},
+					success:function(data){
+						if(data.result == "success"){
+							location.reload();
+						}else if(data.result == "fail"){
+							alert("좋아요 실패");
+						}else{  // data.result == "noLogin"
+							alert("로그인한 경우만 좋아요를 할 수 있습니다.");
+						}
+					},
+					error: function(e){
+						alert("error");
+					}
+					
+				});
+				
+			});
 		
+			/*
+			$(".unLikeBtn").on("click", function(e){
+				e.preventDefault();
+				
+				var postId = $(this).data("post-id");
+				
+				$.ajax({
+					type:"get",
+					url:"/post/unlike",
+					data:{"postId":postId},
+					success:function(data){
+						if(data.result == "success"){
+							location.reload();
+						}else{
+							alert("좋아요 취소 실패");
+						}
+						
+					},
+					error: function(e){
+						alert("error");
+					}
+					
+				});
+				
+			});
+			*/
+			
+			$(".moreBtn").on("click", function(e){
+				e.preventDefault();
+				var postId = $(this).data("post-id");
+				// <a href="#" id="deleteBtn" data-post-id=""></a>
+				$("#deleteBtn").data("post-id", postId);
+				
+			});
+			
+			$("#deleteBtn").on("click", function(e){
+				e.preventDefault();
+				//alert($(this).data("post-id"));
+				var postId = $(this).data("post-id");
+				
+				$.ajax({
+					type:"get",
+					url:"/post/delete",
+					data:{"postId":postId},
+					success:function(data){
+						if(data.result == "success"){
+							location.href="/post/timeline";
+						}else if(data.result == "fail"){
+							alert("삭제 실패");
+						}else{     // data.result == "noMatch" 일 경우
+							alert("해당 게시물을 올린 사용자만 게시물을 삭제할 수 있습니다.");
+						}
+					},
+					error:function(e){
+						alert("error");
+					}
+					
+				});
+				
+			});
 		
 				
-		});
+			
+		});  
 	
 	</script>
 

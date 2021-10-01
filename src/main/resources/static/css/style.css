@@ -38,36 +38,15 @@ header{
 }
 
 .dotBox{
-	border-style: solid; border-top-width: 2px; border-right-width: 2px; border-left-width: 2px; border-bottom-width:1px; 
-	padding: 12px; word-break: break-all; border-color: LightGray;
+	
+	
 	width:500px;
 	height:50px;
 }
 
-.image-box{
-	
-	border-style: solid;border-top-width: 1px; border-right-width: 2px; border-left-width: 2px; border-bottom-width:1px; 
-	word-break: break-all; border-color: LightGray;
-	
-}
-
-.otherContents{
-	border-style: solid; border-bottom-width:1px; border-top-width: 1px; border-right-width: 2px; border-left-width: 2px; 
-	word-break: break-all; border-color: LightGray;
-	
-}
-
-.likeBox{
-	height:40px;
-}
-
-.opinionBox{
-		
-}
 
 .comment{
-	border-style: solid;border-top-width: 1px; border-right-width: 2px; border-left-width: 2px; border-bottom-width:2px; 
-	word-break: break-all; border-color: LightGray;
+	
 	height:50px;
 }
 
@@ -77,6 +56,10 @@ header{
 
 .non-resize {
 	resize:none;		
+}
+
+.more-icon {
+	font-size:25px;	
 }
 
 .image-upload-icon{

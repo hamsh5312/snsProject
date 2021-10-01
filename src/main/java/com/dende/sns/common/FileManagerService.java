@@ -60,4 +60,40 @@ public class FileManagerService {
 		
 	}
 	
+	
+	public static void removeFile(String filePath) {
+		// filePath
+		// post 테이블에 있는 imagePath
+		// ex > /images/1-201020123/test.png
+		// 실제 경로 ex > C:\\springTest\\upload\\images\1-201020123\test.png
+		
+		String realFilePath = FILE_UPLOAD_PATH + filePath.replace("/images/", "");
+		Path path = Paths.get(realFilePath);
+		if(Files.exists(path)) {
+			try {
+				Files.delete(path);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
+		// 디렉토리(폴더) 삭제
+		// C:\\springTest\\upload\\images\1-201020123
+		path = path.getParent();
+		if(Files.exists(path)) {
+			try {
+				Files.delete(path);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
+		
+	}
+	
+	
+	
+	
 }
