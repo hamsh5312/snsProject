@@ -24,4 +24,9 @@ public class CommentBO {
 		return commentDAO.selectCommentListByPostId(postId);
 	}
 	
+	// postId 를 대상으로 삭제
+	public int deleteCommentByPostId(int postId) {
+		return commentDAO.deleteCommentByPostId(postId);
+	}
+	
 }

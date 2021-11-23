@@ -18,7 +18,7 @@ import com.dende.sns.post.model.PostDetail;
 @Controller
 @RequestMapping("/post")
 public class PostController {
-
+	
 	@Autowired
 	private PostBO postBO;
 	
@@ -34,10 +34,6 @@ public class PostController {
 		
 		return "post/timeline";
 	}
-	
-	
-	
-
 	
 	
 }

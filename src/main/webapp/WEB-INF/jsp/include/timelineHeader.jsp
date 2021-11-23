@@ -9,9 +9,8 @@
 			</div>
 			<div class="header-box d-flex justify-content-around">
 				
-				<div class="d-flex align-items-center pt-3">
-					<img src="/static/images/instagram-new-logo.png" width="150px;" height="50px;">
-				</div>
+				<i class="bi bi-instagram" style="font-size:35px;"></i>
+				
 				<div class="searchBar" style="width:200px; height:50px;">
 					<form>
 					<!-- 왜 이 아래에 pt-3 이 표시 말고 d-flex align-items-center 를 이용해서 맞추려고 하면 안될까? -->

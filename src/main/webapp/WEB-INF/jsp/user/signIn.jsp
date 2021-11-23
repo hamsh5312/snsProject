@@ -61,10 +61,6 @@
 			</div>
 			
 		</section>
-		
-		<footer>
-			
-		</footer>
 	
 	</div>
 	
@@ -119,11 +115,7 @@
 	
 	
 	</script>
-	
-	
-	
-	
-	
+
 	
 </body>
 </html>

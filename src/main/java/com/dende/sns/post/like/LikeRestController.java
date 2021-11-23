@@ -48,7 +48,8 @@ public class LikeRestController {
 	
 	
 	//  원래는 timeline 에서 likeBtn 과 unLikeBtn 두개를 설정해서 두개의 메소드로 분기해서 했었는데 
-	// 그래서 아래와 같은 메소드를 만들었던건데, 
+	// 그래서 아래와 같은 메소드를 만들었지만,  위의 "/post/like"만을 가지고도 충분히 구현이 가능했다.
+	// 지금 코드의 현상태에서는 아래 메소드는 사용되지 않고 있다.  일단 만들어보았고, 참고 정도 하면 된다.
 	@GetMapping("/unlike")
 	public Map<String, String> unlike(
 			@RequestParam("postId") int postId

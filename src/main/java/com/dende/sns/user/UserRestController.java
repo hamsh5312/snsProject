@@ -62,21 +62,26 @@ public class UserRestController {
 			, @RequestParam("password") String password
 			, HttpServletRequest request){
 		
-		User user =userBO.signIn(loginId, password);
+		User user = userBO.signIn(loginId, password);
 		Map<String, String> result = new HashMap<>();
 		
 		// 샐랙트 결과가 있냐 없냐?
 		// 셀렉트 결과가 있다
 		if(user != null) {			
 			result.put("result", "success");
+			
 			HttpSession session = request.getSession();
 			session.setAttribute("userId", user.getId());
 			session.setAttribute("userLoginId", user.getLoginId());
 			session.setAttribute("userName", user.getName());
+			
 		}else {
 			result.put("result", "fail");
 		}		
-		return result;		
+		return result;	
+		
 	}
 	
+	
 }
+

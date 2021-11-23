@@ -32,14 +32,19 @@ public class CommentRestController {
 		String userName = (String)session.getAttribute("userName");
 		
 		Map<String ,String> result = new HashMap<>();
+		
 		int count = commentBO.inputComment(postId, userId, userName, content);
+		
 		if(count == 1) {
 			result.put("result", "success");
 		}else {
 			result.put("result","fail");
 		}
+		
 		return result;
+		
 	}
+	
 	
 }
 

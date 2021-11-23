@@ -23,10 +23,10 @@ public class FileManagerService {
 		
 //		Logger logger = LoggerFactory.getLogger(this.getClass());
 		
-		//43_281281298129/
+		// 43_281281298129/
 		String directoryName = userId + "_" + System.currentTimeMillis() + "/";
 		
-		//C:\\springTest\\upload\\images/43_281281298129/
+		// C:\\springTest\\upload\\images/43_281281298129/
 		String filePath = FILE_UPLOAD_PATH + directoryName;
 		
 		// 디렉토리 생성
@@ -61,13 +61,14 @@ public class FileManagerService {
 	}
 	
 	
-	public static void removeFile(String filePath) {
-		// filePath
+	public void removeFile(String filePath) {
+		// 삭제할 파일 경로
 		// post 테이블에 있는 imagePath
-		// ex > /images/1-201020123/test.png
-		// 실제 경로 ex > C:\\springTest\\upload\\images\1-201020123\test.png
+		// filePath: /images/10_21924214/test.png
+		// 실제 파일이 저장된 경로 :  C:\\springTest\\upload\\images\\10_21924214\\test.png
 		
 		String realFilePath = FILE_UPLOAD_PATH + filePath.replace("/images/", "");
+		
 		Path path = Paths.get(realFilePath);
 		if(Files.exists(path)) {
 			try {
@@ -79,8 +80,9 @@ public class FileManagerService {
 		}
 		
 		// 디렉토리(폴더) 삭제
-		// C:\\springTest\\upload\\images\1-201020123
+		// C:\\springTest\\upload\\images\\10_21924214
 		path = path.getParent();
+		
 		if(Files.exists(path)) {
 			try {
 				Files.delete(path);

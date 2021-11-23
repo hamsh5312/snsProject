@@ -46,23 +46,27 @@
 				<!-- 타이틀 -->
 				<div class="dotBox d-flex justify-content-between align-items-center">
 					<div class="pl-2">
-						<img src="/static/images/hm_circle.png" width="40px;" height="40px;">
+						<img src="/static/images/cat.jpg" width="40px;" height="40px;">
 						${postDetail.post.userName }
 					</div>
 					
-					<!--  더보기 버튼 -->
+					<!--   더보기 버튼   -->
 					<c:if test="${userId ne null }">
-					<div class="more-icon pr-2 pb-2">
-						<a class="text-dark moreBtn" href="#" data-post-id="${postDetail.post.id }" data-toggle="modal" data-target="#deleteModal">
-							<i class="bi bi-three-dots"></i>
-						</a>
-					</div>	
-					</c:if>					
+						<!-- post의 userId 와 현재 로그인한 사용자의 userId 가 같은지 확인하기  -->
+						<c:if test="${postDetail.post.userId eq userId }">
+							<div class="more-icon pr-2 pb-2">
+								<a class="text-dark moreBtn" href="#" data-post-id="${postDetail.post.id }" data-toggle="modal" data-target="#deleteModal">
+									<i class="bi bi-three-dots"></i>
+								</a>
+							</div>	
+						</c:if>
+					</c:if>	
+									
 				</div>
 				
 				<!-- 이미지 -->
 				<div>
-					<img src="${postDetail.post.imagePath }" class="w-100 imageClick">
+					<img src="${postDetail.post.imagePath }" class="w-100 imageClick" style="height:350px;">
 				</div>
 				
 				<!-- 좋아요  -->
@@ -125,8 +129,7 @@
 					</div>
 					</c:if>
 				</div>
-				
-				
+								
 			</div>	<!-- <div class="my-3 card border rounded">의 끝 -->
 			
 			</c:forEach>
@@ -320,7 +323,7 @@
 					data:{"postId":postId},
 					success:function(data){
 						if(data.result == "success"){
-							location.href="/post/timeline";
+							location.reload();
 						}else if(data.result == "fail"){
 							alert("삭제 실패");
 						}else{     // data.result == "noMatch" 일 경우
@@ -335,7 +338,8 @@
 				
 			});
 		
-				
+			
+			
 			
 		});  
 	

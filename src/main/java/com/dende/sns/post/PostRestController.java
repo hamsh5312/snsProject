@@ -37,10 +37,9 @@ public class PostRestController {
 		int userId = (Integer)session.getAttribute("userId");
 		String userName = (String)session.getAttribute("userName");
 		
-		
-		int count = postBO.addPost(userId, userName, content, file);
 		Map<String, String> result = new HashMap<>();
 		
+		int count = postBO.addPost(userId, userName, content, file);
 		if(count == 1) {
 			result.put("result", "success");
 		}else {
@@ -49,8 +48,10 @@ public class PostRestController {
 		return result;
 	}
 	
+	
 	@GetMapping("/delete")
-	public Map<String ,String> delete(@RequestParam("postId") int postId
+	public Map<String ,String> delete(
+			@RequestParam("postId") int postId
 			, HttpServletRequest request){
 		
 		HttpSession session = request.getSession();
@@ -63,18 +64,22 @@ public class PostRestController {
 		
 		// deleteCheck 가 null 이 아닐경우만! 즉, 해당 게시물(post)를 올린 userId와 postId(post에서 id) 가 정확히 일치할때만 삭제를 진행 !
 		if(deleteCheck != null) {
-			int count = postBO.deletePost(postId, userId);
-			if(count == 0) {
-				result.put("result", "fail");
-			}else {
+			
+			if(postBO.deletePost(postId, userId)) {
 				result.put("result", "success");
+			}else {
+				result.put("result", "fail");
 			}
+			
 			return result;
-		}else {       // 해당 게시물을 올린 userId 가 아닐 경우 삭제 금지
+			
+		}else {      // 해당 게시물을 올린 userId 가 아닐 경우 삭제 금지
 			result.put("result", "noMatch");
 			return result;
 		}
+		
 	}
+	
 	
 	
 	

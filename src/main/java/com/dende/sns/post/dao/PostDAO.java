@@ -16,21 +16,14 @@ public interface PostDAO {
 			, @Param("content") String content
 			, @Param("imagePath") String imagePath);
 	
+	public List<Post> selectPostList();
 	
 	public Post selectPost(
 			@Param("id") int id
 			, @Param("userId") int userId);
 	
-	
-	
-	public List<Post> selectPostList();
-	
 	public int deletePost(
 			@Param("id") int id
 			, @Param("userId") int userId);
-	
-	public int deleteLike(@Param("id") int id);
-	
-	public int deleteComment(@Param("id") int id);
 	
 }
