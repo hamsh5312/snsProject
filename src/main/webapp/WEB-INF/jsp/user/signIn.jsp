@@ -29,14 +29,17 @@
 			<div class="d-flex justify-content-center align-items-center">
 				
 				<div class="mr-5 mt-5">
-					<img src="/static/images/insta_img.jpg" width="250px;" height="350px;">
+					<img src="/static/images/insta_img.jpg" width="250px;" height="370px;">
 				</div>
 				
-				<div class="login-box mt-5 pt-5">
+				<div class="login-box mt-5 pt-4">
 					<form id="loginForm">
 						<input type="text" id="loginIdInput" class="form-control" placeholder="아이디를 입력하세요.">
 						<input type="password" id="passwordInput" class="form-control mt-3" placeholder="비밀번호를 입력하세요.">
 						<button id="loginBtn" type="submit" class="btn btn-dark btn-block mt-3" >로그인</button>
+						<div class="text-center pt-4">
+							<a href="/post/timeline" style="text-decoration-line:none;"><span>로그인 없이 이용하기</span></a>
+						</div>
 					</form>
 					<div class="d-flex mt-3">
 						<hr width="130px;">
