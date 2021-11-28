@@ -16,6 +16,10 @@
 * 인스타그램을 부분 카피한 웹 개발 프로젝트이다.
 * 로그인을 하지 않아도 게시판의 목록은 볼 수 있으나 로그인을 해야 기능이 활성화되는 게시판
 
+### :family: 관련 프로젝트
+[메모장](https://github.com/hamsh5312/web_memo_0909) 
+[고해](https://github.com/hamsh5312/solution_project) 
+
 ### :tv: SNS(인스타그램) 유트브 링크
 [SNS(인스타그램)](https://www.youtube.com/watch?v=WSL7dMmO8RI)
 
