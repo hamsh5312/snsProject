@@ -31,8 +31,14 @@ https://onedrive.live.com/view.aspx?resid=AE4199115FE7DF6A!11912&ithint=file%2cx
 * 회원가입, 로그인
   * package: [com.dende.sns.user.*](https://github.com/hamsh5312/snsProject/tree/develop/src/main/java/com/dende/sns/user)
   * view: [/webapp/WEB-INF/jsp/user/*](https://github.com/hamsh5312/snsProject/tree/develop/src/main/webapp/WEB-INF/jsp/user)
-* 게시글 쓰기, 좋아요, 댓글
+* 게시글 쓰기
   * package: [com.dende.sns.post.*](https://github.com/hamsh5312/snsProject/tree/develop/src/main/java/com/dende/sns/post)
+  * view: [/webapp/WEB-INF/jsp/post/*](https://github.com/hamsh5312/snsProject/tree/develop/src/main/webapp/WEB-INF/jsp/post)
+* 좋아요
+  * package: [com.dende.sns.post.like.*](https://github.com/hamsh5312/snsProject/tree/develop/src/main/java/com/dende/sns/post/like)
+  * view: [/webapp/WEB-INF/jsp/post/*](https://github.com/hamsh5312/snsProject/tree/develop/src/main/webapp/WEB-INF/jsp/post)
+* 댓글
+  * package: [com.dende.sns.post.comment.*](https://github.com/hamsh5312/snsProject/tree/develop/src/main/java/com/dende/sns/post/comment)
   * view: [/webapp/WEB-INF/jsp/post/*](https://github.com/hamsh5312/snsProject/tree/develop/src/main/webapp/WEB-INF/jsp/post)
 
 ### :pencil2: 외부 라이브러리 라이센스 :pencil2:
