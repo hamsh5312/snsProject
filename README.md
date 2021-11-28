@@ -28,3 +28,23 @@ https://ovenapp.io/view/MV3FzPLRfXI21RS7T5WbVMcfV8EThMRM/ovCsw
 * 데이터 베이스, URL 설계<br>
 https://onedrive.live.com/view.aspx?resid=AE4199115FE7DF6A!11912&ithint=file%2cxlsx&authkey=!AJ2qh6ii9m6CY1E
 ### :hammer_and_pick: 주요기능 :hammer_and_pick:
+* 회원가입, 로그인
+  * package: [com.hamsh5312.dende.sns.user.*](https://github.com/hamsh5312/snsProject/tree/develop/src/main/java/com/dende/sns/user)
+  * view: [/webapp/WEB-INF/jsp/user/*](https://github.com/hamsh5312/snsProject/tree/develop/src/main/webapp/WEB-INF/jsp/user)
+* 게시글 쓰기, 좋아요, 댓글
+  * package: [com.hamsh5312.dende.sns.post.*](https://github.com/hamsh5312/snsProject/tree/develop/src/main/java/com/dende/sns/post)
+  * view: [/webapp/WEB-INF/jsp/post/*](https://github.com/hamsh5312/snsProject/tree/develop/src/main/webapp/WEB-INF/jsp/post)
+
+### :pencil2: 외부 라이브러리 라이센스 :pencil2:
+* Tomcat [Apache License 2.0](https://www.apache.org/licenses/LICENSE-2.0)
+* Mysql [GPLv2 or proprietary](https://www.gnu.org/licenses/gpl-3.0.html)
+* Spring framework [Apache License 2.0](https://www.apache.org/licenses/LICENSE-2.0)
+* Mybatis [Apache License 2.0](https://www.apache.org/licenses/LICENSE-2.0)
+* Bootstrap [MIT License](https://opensource.org/licenses/MIT)
+* jQuery [MIT License](https://opensource.org/licenses/MIT)
+* 이미지 출처 : [pixabay](https://pixabay.com/ko/)
+ 
+### 🎁 향후 계획
+* 사진 여러개 추가 기능
+* 댓글 접기 기능
+* 개인 프로필 
